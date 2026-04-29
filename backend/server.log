@@ -1,0 +1,54 @@
+INFO:     Will watch for changes in these directories: ['c:\\Users\\samra\\Downloads\\loan-app\\backend']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [28680] using StatReload
+INFO:     Started server process [2072]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:55302 - "OPTIONS /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55302 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52352 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63120 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56329 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53220 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64417 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57838 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52352 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63120 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56329 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53220 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52535 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52535 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57802 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58542 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61747 - "OPTIONS /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61747 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56303 - "OPTIONS /api/otp/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56303 - "POST /api/otp/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52367 - "POST /api/otp/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65037 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51129 - "OPTIONS /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64462 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51129 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53452 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50465 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61664 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60932 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51129 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64462 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53452 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50465 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61664 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60932 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61664 - "OPTIONS /api/otp/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60932 - "OPTIONS /api/otp/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61664 - "OPTIONS /api/otp/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60932 - "POST /api/otp/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61664 - "POST /api/otp/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60932 - "POST /api/otp/verify HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51129 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64462 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53452 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50465 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62000 - "POST /api/otp/send HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64680 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64680 - "GET /openapi.json HTTP/1.1" 200 OK
