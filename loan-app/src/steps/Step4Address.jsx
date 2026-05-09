@@ -1,30 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-// Sample PIN data - 20 major cities
-const PIN_DATA = {
-  "110001": { city: "New Delhi",     state: "Delhi",             po: "Connaught Place" },
-  "110011": { city: "New Delhi",     state: "Delhi",             po: "Lodhi Road" },
-  "400001": { city: "Mumbai",        state: "Maharashtra",       po: "Mumbai GPO" },
-  "400051": { city: "Mumbai",        state: "Maharashtra",       po: "Bandra" },
-  "560001": { city: "Bengaluru",     state: "Karnataka",         po: "Bengaluru GPO" },
-  "600001": { city: "Chennai",       state: "Tamil Nadu",        po: "Chennai GPO" },
-  "700001": { city: "Kolkata",       state: "West Bengal",       po: "Kolkata GPO" },
-  "500001": { city: "Hyderabad",     state: "Telangana",         po: "Hyderabad GPO" },
-  "380001": { city: "Ahmedabad",     state: "Gujarat",           po: "Ahmedabad GPO" },
-  "411001": { city: "Pune",          state: "Maharashtra",       po: "Pune City" },
-  "302001": { city: "Jaipur",        state: "Rajasthan",         po: "Jaipur GPO" },
-  "226001": { city: "Lucknow",       state: "Uttar Pradesh",     po: "Lucknow GPO" },
-  "800001": { city: "Patna",         state: "Bihar",             po: "Patna GPO" },
-  "751001": { city: "Bhubaneswar",   state: "Odisha",            po: "Bhubaneswar GPO" },
-  "682001": { city: "Kochi",         state: "Kerala",            po: "Ernakulam GPO" },
-  "160017": { city: "Chandigarh",    state: "Chandigarh",        po: "Sector 17" },
-  "248001": { city: "Dehradun",      state: "Uttarakhand",       po: "Dehradun GPO" },
-  "781001": { city: "Guwahati",      state: "Assam",             po: "Guwahati GPO" },
-  "440001": { city: "Nagpur",        state: "Maharashtra",       po: "Nagpur GPO" },
-  "201301": { city: "Noida",         state: "Uttar Pradesh",     po: "Noida Sector 18" },
-};
-
 export default function Step4Address({ next, back, defaultValues }) {
   const { register, handleSubmit, watch, setValue,
     formState: { errors, touchedFields } } =
@@ -36,23 +12,27 @@ export default function Step4Address({ next, back, defaultValues }) {
   const [pinLoading, setPinLoading] = useState(false);
   const [pinError,   setPinError]   = useState("");
 
-  const lookupPin = (pin) => {
+  const lookupPin = async (pin) => {
     if (pin.length !== 6) return;
     setPinLoading(true);
     setPinError("");
-    setTimeout(() => {
-      const data = PIN_DATA[pin];
-      if (data) {
-        setValue("city",  data.city,  { shouldValidate: true });
-        setValue("state", data.state, { shouldValidate: true });
-        setValue("postOffice", data.po);
+    try {
+      const res  = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
+      const data = await res.json();
+      if (data[0].Status === "Success") {
+        const po = data[0].PostOffice[0];
+        setValue("city",       po.District, { shouldValidate: true });
+        setValue("state",      po.State,    { shouldValidate: true });
+        setValue("postOffice", po.Name);
       } else {
         setPinError("PIN code not found. Please enter city and state manually.");
         setValue("city",  "");
         setValue("state", "");
       }
-      setPinLoading(false);
-    }, 800);
+    } catch {
+      setPinError("Lookup failed. Please enter city and state manually.");
+    }
+    setPinLoading(false);
   };
 
   const onSubmit = (data) => next(data);
@@ -100,12 +80,15 @@ export default function Step4Address({ next, back, defaultValues }) {
         <label htmlFor="pincode" className="block text-sm font-medium mb-1">
           PIN Code <span className="text-red-500">*</span>
         </label>
-        <input id="pincode" type="text" placeholder="6 digit PIN code"
+        <input
+          id="pincode"
+          type="text"
+          placeholder="6 digit PIN code"
           {...register("pincode", {
             required: "PIN code is required",
             pattern: { value: /^[0-9]{6}$/, message: "PIN must be exactly 6 digits" },
+            onChange: (e) => lookupPin(e.target.value),
           })}
-          onChange={(e) => { lookupPin(e.target.value); }}
           className={inputClass(errors.pincode)}
           maxLength={6}
           autoComplete="postal-code"
@@ -123,7 +106,7 @@ export default function Step4Address({ next, back, defaultValues }) {
           <label htmlFor="city" className="block text-sm font-medium mb-1">
             City <span className="text-red-500">*</span>
           </label>
-          <input id="city" type="text" placeholder="City"
+          <input id="city" type="text" placeholder="Auto-filled"
             {...register("city", { required: "City is required" })}
             className={inputClass(errors.city)}
             autoComplete="address-level2"
@@ -134,7 +117,7 @@ export default function Step4Address({ next, back, defaultValues }) {
           <label htmlFor="state" className="block text-sm font-medium mb-1">
             State <span className="text-red-500">*</span>
           </label>
-          <input id="state" type="text" placeholder="State"
+          <input id="state" type="text" placeholder="Auto-filled"
             {...register("state", { required: "State is required" })}
             className={inputClass(errors.state)}
             autoComplete="address-level1"
@@ -163,7 +146,7 @@ export default function Step4Address({ next, back, defaultValues }) {
         )}
       </div>
 
-      {/* Rent Amount - only if Rented */}
+      {/* Rent Amount */}
       {residenceType === "Rented" && (
         <div className="mb-3">
           <label htmlFor="rentAmount" className="block text-sm font-medium mb-1">
@@ -200,7 +183,7 @@ export default function Step4Address({ next, back, defaultValues }) {
         )}
       </div>
 
-      {/* Previous Address - if < 1 year */}
+      {/* Previous Address */}
       {yearsAtAddr !== undefined && Number(yearsAtAddr) < 1 && (
         <div className="mb-3 p-3 bg-amber-50 border border-amber-200 rounded">
           <p className="text-sm font-medium text-amber-700 mb-2">
